@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const initializeApp = async () => {
       // Simulate loading time for assets, API calls, etc.
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      await new Promise(resolve => setTimeout(resolve, 3200));
       setIsLoading(false);
     };
 
