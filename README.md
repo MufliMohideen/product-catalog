@@ -76,4 +76,3 @@ Product Catalog/
 - DELETE /api/products/{id} - Delete a product
 - GET /api/products/category/{category} - Get products by category
 - GET /api/products/search?searchTerm={term} - Search products
-- GET /api/products/active - Get active products only
