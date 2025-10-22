@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tooltip } from 'react-tooltip';
 import type { Product } from '../types/product';
+import { getDefaultCurrency } from '../utils/env';
 
 
 interface ProductCardProps {
@@ -23,7 +24,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   showActions = true 
 }) => {
   const formatPrice = (price: number) => {
-    const currency = import.meta.env.VITE_DEFAULT_CURRENCY || 'USD';
+    const currency = getDefaultCurrency();
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency

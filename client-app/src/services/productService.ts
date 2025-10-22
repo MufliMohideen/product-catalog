@@ -1,10 +1,11 @@
 import axios from 'axios';
 import type { AxiosResponse } from 'axios';
 import type { Product, CreateProduct, UpdateProduct } from '../types/product';
+import { getEnvVar } from '../utils/env';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5073/api',
-  timeout: Number(import.meta.env.VITE_API_TIMEOUT) || 10000,
+  baseURL: getEnvVar('VITE_API_BASE_URL'),
+  timeout: Number(getEnvVar('VITE_API_TIMEOUT')),
   headers: {
     'Content-Type': 'application/json',
   },
@@ -12,13 +13,13 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    if (import.meta.env.VITE_ENABLE_REQUEST_LOGGING === 'true') {
+    if (getEnvVar('VITE_ENABLE_REQUEST_LOGGING') === 'true') {
       console.log(`Making ${config.method?.toUpperCase()} request to ${config.url}`);
     }
     return config;
   },
   (error) => {
-    if (import.meta.env.VITE_ENABLE_DEBUG_LOGS === 'true') {
+    if (getEnvVar('VITE_ENABLE_DEBUG_LOGS') === 'true') {
       console.error('Request error:', error);
     }
     return Promise.reject(error);
@@ -28,7 +29,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (import.meta.env.VITE_ENABLE_DEBUG_LOGS === 'true') {
+    if (getEnvVar('VITE_ENABLE_DEBUG_LOGS') === 'true') {
       console.error('API Error:', error.response?.data || error.message);
     }
     return Promise.reject(error);
